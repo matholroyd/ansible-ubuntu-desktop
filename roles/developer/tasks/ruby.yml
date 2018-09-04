@@ -1,0 +1,19 @@
+---
+- name: Check if rbenv installed
+  shell: rbenv --version
+  register: rbenv_check
+  ignore_errors: true
+    
+- name: Clone rbenv
+  git: 
+    repo: https://github.com/rbenv/rbenv.git
+    dest: ~/.rbenv
+  when: rbenv_check is failed
+  notify:
+    - refresh user shell
+    
+- name: Install ruby-build as plugin
+  git: 
+    repo: https://github.com/rbenv/ruby-build.git
+    dest: ~/.rbenv/plugins/ruby-build
+  when: rbenv_check is failed

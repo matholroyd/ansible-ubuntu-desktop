@@ -1,17 +1,14 @@
 ---
-- name: Update ubuntu packages
-  become: true
-  apt:
-    upgrade: dist
+- name: Start by making sure normal user
+  become: "{{username}}"
 
-# - name: install python 2
+# - name: Update ubuntu packages
 #   become: true
 #   apt:
-#     name: python
-#     state: present
+#     upgrade: dist
     
-- name: copy bash_aliases
+- name: copy bash_profile
   template:
-    src: files/bash_aliases.sh
-    dest: ~/.bash_aliases
+    src: files/bash_profile.sh
+    dest: ~/.bash_profile
 

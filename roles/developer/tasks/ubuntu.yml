@@ -1,0 +1,17 @@
+---
+- name: Update ubuntu packages
+  become: true
+  apt:
+    upgrade: dist
+
+# - name: install python 2
+#   become: true
+#   apt:
+#     name: python
+#     state: present
+    
+- name: copy bash_aliases
+  template:
+    src: files/bash_aliases.sh
+    dest: ~/.bash_aliases
+

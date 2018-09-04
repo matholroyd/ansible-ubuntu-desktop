@@ -1,0 +1,5 @@
+[hlservers]
+aws-dev-server
+
+[hlservers:vars]
+ansible_python_interpreter=/usr/bin/python3

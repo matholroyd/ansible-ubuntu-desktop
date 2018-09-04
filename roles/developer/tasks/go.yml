@@ -1,0 +1,22 @@
+---
+- name: Check if Go installed
+  shell: source ~/.bash_aliases && go version
+  args:
+      executable: /bin/bash
+  register: go_check
+  ignore_errors: true
+    
+- name: Download and unpack Go source
+  unarchive:
+    src: "{{go_lang_sources}}{{go_lang_10_1}}"
+    dest: ~/
+    remote_src: true
+  when: go_check is failed
+
+- name: Move go source to /usr/local
+  become: true
+  command: mv go /usr/local
+  when: go_check is failed
+  notify:
+    - reload bash_aliases
+      

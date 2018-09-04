@@ -1,0 +1,49 @@
+---
+# Following instructions from https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+  
+- name: Check if Docker installed
+  shell: docker --version
+  register: docker_check
+  ignore_errors: true
+
+- name: Add docker gpg key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  when: docker_check is failed
+      
+- name: Add official docker repos
+  become: true
+  shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+  when: docker_check is failed
+
+- name: Install docker from offical source
+  become: true
+  apt:
+    name: docker-ce
+    update_cache: true
+    state: present
+  when: docker_check is failed
+
+- name: Check if docker-compose installed
+  shell: docker-compose --version
+  register: docker_compose_check
+  ignore_errors: true
+
+- name: Download docker-compose
+  become: true
+  shell: curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+  when: docker_compose_check is failed
+
+- name: Fix docker-compose 
+  become: true
+  shell: chmod +x /usr/local/bin/docker-compose
+  when: docker_compose_check is failed
+  
+- name: Add user to docker usergroup
+  user: 
+    name: "{{username}}"
+    groups: docker
+    append: yes
+  become: true
+  notify:
+    - refresh user shell
+    

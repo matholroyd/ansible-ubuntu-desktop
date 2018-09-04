@@ -1,0 +1,8 @@
+- name: reload bash_aliases
+  shell: source ~/.bash_aliases
+  args:
+      executable: /bin/bash
+
+- name: refresh user shell
+  command: su {{username}}
+  become: true

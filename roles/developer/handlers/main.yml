@@ -1,5 +1,5 @@
 - name: reload bash_aliases
-  shell: source ~/.bash_profile
+  shell: source ~/.bash_additions
   args:
       executable: /bin/bash
 

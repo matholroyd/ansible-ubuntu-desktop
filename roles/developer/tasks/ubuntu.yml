@@ -4,8 +4,16 @@
   apt:
     upgrade: dist
     
-- name: copy bash_profile
+- name: copy bash_additions
   template:
-    src: files/bash_profile.sh
-    dest: ~/.bash_profile
+    src: files/bash_additions.sh
+    dest: ~/.bash_additions
+
+- name: Ensure .bashrc sources the additions
+  lineinfile:
+    path: ~/.bashrc
+    state: present
+    line: source ~/.bash_additions
+    
+
 

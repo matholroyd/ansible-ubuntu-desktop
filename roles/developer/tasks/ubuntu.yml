@@ -15,5 +15,9 @@
     state: present
     line: source ~/.bash_additions
     
-
-
+- name: Install packages needed for some of the depencies
+  become: true
+  apt:
+    name: autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
+    update_cache: true
+    state: present

@@ -1,6 +1,6 @@
 ---
 - name: Check if Go installed
-  shell: source ~/.bash_aliases && go version
+  shell: source ~/.bash_profile && go version
   args:
       executable: /bin/bash
   register: go_check

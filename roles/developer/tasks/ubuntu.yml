@@ -1,11 +1,8 @@
 ---
-- name: Start by making sure normal user
-  become: "{{username}}"
-
-# - name: Update ubuntu packages
-#   become: true
-#   apt:
-#     upgrade: dist
+- name: Update ubuntu packages
+  become: true
+  apt:
+    upgrade: dist
     
 - name: copy bash_profile
   template:

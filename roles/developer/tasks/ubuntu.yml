@@ -33,3 +33,4 @@
       - libffi-dev 
       - libgdbm5 
       - libgdbm-dev
+      - libssl-dev

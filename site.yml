@@ -1,8 +1,8 @@
 ---
 # This playbook deploys the whole application stack in this site.
 
-- name: apply hyperledger fabric config
-  hosts: hlservers
+- name: apply developer config
+  hosts: desktop
   remote_user: "{{username}}"
   
   roles: 

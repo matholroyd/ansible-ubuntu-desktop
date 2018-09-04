@@ -17,3 +17,8 @@
     repo: https://github.com/rbenv/ruby-build.git
     dest: ~/.rbenv/plugins/ruby-build
   when: rbenv_check is failed
+
+- name: Install ruby
+  shell: rbenv install 2.3.7
+
+  

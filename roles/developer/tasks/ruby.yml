@@ -19,7 +19,7 @@
   when: rbenv_check is failed
 
 - name: Install ruby
-  shell: rbenv install 2.3.7
+  shell: rbenv install -s 2.3.7
 
 - name: Set ruby 
   shell: rbenv global 2.3.7

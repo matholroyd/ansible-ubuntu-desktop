@@ -3,6 +3,7 @@
   become: true
   apt:
     upgrade: dist
+    update_cache: true
     
 - name: copy bash_additions
   template:

@@ -1,8 +1,9 @@
 ---
 - include: ubuntu.yml
+- include: postgres.yml
 - include: ruby.yml
+- include: nodejs.yml
 
 # - include: docker.yml
 # - include: go.yml
-# - include: nodejs.yml
 

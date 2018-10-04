@@ -1,22 +1,27 @@
 ---
-- name: Check if NodeJS installed
-  shell: source ~/.bash_aliases && node --version
-  args:
-      executable: /bin/bash
-  register: nodejs_check
-  ignore_errors: true
+# - name: Check if NodeJS installed
+#   shell: source ~/.bash_aliases && node --version
+#   args:
+#       executable: /bin/bash
+#   register: nodejs_check
+#   ignore_errors: true
     
-- name: Download and unpack NodeJS bin
-  unarchive:
-    src: "{{nodejs_sources}}{{nodejs_8_11}}"
-    dest: ~/
-    remote_src: true
-  when: nodejs_check is failed
+# - name: Download and unpack NodeJS bin
+#   unarchive:
+#     src: "{{nodejs_sources}}{{nodejs_8_11}}"
+#     dest: ~/
+#     remote_src: true
+#   when: nodejs_check is failed
 
-- name: Move NodeJS bin to /usr/local
+# - name: Move NodeJS bin to /usr/local
+#   become: true
+#   command: mv node-v8.11.4-linux-x64 /usr/local/nodejs
+#   when: nodejs_check is failed
+#   notify:
+#     - reload bash_aliases
+
+- apt: name=nodejs
   become: true
-  command: mv node-v8.11.4-linux-x64 /usr/local/nodejs
-  when: nodejs_check is failed
-  notify:
-    - reload bash_aliases
 
+# - apt: name=npm
+#   become: true

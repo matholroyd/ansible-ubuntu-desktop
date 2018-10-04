@@ -24,4 +24,40 @@
 - name: Set ruby 
   shell: rbenv global 2.3.7
 
-  
+- gem: name=bundler   
+- gem: name=ruby_dep
+
+
+- name: Install packages needed for rails development
+  become: true
+  apt:
+    name: "{{packages}}"
+  vars:
+    packages:
+      - chromium-browser
+      - qt5-default
+      - libqt5webkit5-dev
+      - gstreamer1.0-plugins-base
+      - gstreamer1.0-tools
+      - gstreamer1.0-x
+      - libcurl4-openssl-dev
+      - libpq-dev
+      - postgresql-common
+      - python-psycopg2
+
+- postgresql_user:
+    name: matholroyd
+    password: password
+    role_attr_flags: SUPERUSER
+  become: true
+  become_user: postgres
+
+- name: Check if Heroku CLI installed
+  shell: heroku --version
+  register: heroku_check
+  ignore_errors: true
+
+- name: Install Heroku CLI
+  shell: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  when: heroku_check is failed
+

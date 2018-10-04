@@ -24,6 +24,8 @@
   state: present
   vars:
     packages:
+      - wget
+      - curl 
       - htop
       - autoconf
       - bison 

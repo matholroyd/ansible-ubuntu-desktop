@@ -4,7 +4,6 @@
 - name: apply developer config
   hosts: localhost
   remote_user: "{{username}}"
-  
   roles: 
     - developer
 

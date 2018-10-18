@@ -27,7 +27,6 @@
 - gem: name=bundler   
 - gem: name=ruby_dep
 
-
 - name: Install packages needed for rails development
   become: true
   apt:
@@ -44,6 +43,7 @@
       - libpq-dev
       - postgresql-common
       - python-psycopg2
+      - redis-server
 
 - postgresql_user:
     name: matholroyd
@@ -60,4 +60,15 @@
 - name: Install Heroku CLI
   shell: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
   when: heroku_check is failed
+
+# https://stackoverflow.com/questions/50244429/error-while-loading-shared-libraries-libevent-2-0-so-5
+- name: Library needed for prax
+  become: true
+  apt:
+    deb: https://drive.google.com/uc?authuser=0&id=1xG1a3GMZuLc1HIRYMP2vythuqjODmN8o&export=download
+
+- name: Install prax
+  become: true
+  apt: 
+    deb: https://github.com/ysbaddaden/prax.cr/releases/download/v0.8.0/prax_0.8.0-1_amd64.deb
 
